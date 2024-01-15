@@ -1,3 +1,4 @@
+import { ChakraProvider, Text } from '@chakra-ui/react';
 import { WagmiConfig, createConfig } from "wagmi";
 import { ConnectKitProvider, ConnectKitButton, getDefaultConfig } from "connectkit";
 
@@ -23,13 +24,15 @@ const config = createConfig(
 function App() {
 
   return (
-    <WagmiConfig config={config}>
-      <ConnectKitProvider>
-        <h1>Loan NFT</h1>
-        <ConnectKitButton />
-      </ConnectKitProvider>
-    </WagmiConfig>
-  )
-}
+    <ChakraProvider>
+      <WagmiConfig config={config}>
+        <ConnectKitProvider>
+          <h1>Loan NFT</h1>
+          <ConnectKitButton />
+        </ConnectKitProvider>
+      </WagmiConfig>
+    </ChakraProvider>
+  );
+};
 
 export default App;
