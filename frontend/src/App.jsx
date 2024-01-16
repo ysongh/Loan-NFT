@@ -6,6 +6,8 @@ import { sepolia } from "wagmi/chains";
 
 import { ALCHEMY_ID, WALLETCONNECT_PROJECT_ID } from "./keys";
 
+import Navbar from './components/layout/Navbar';
+
 const chains = [sepolia];
 
 const config = createConfig(
@@ -34,6 +36,7 @@ function App() {
       <WagmiConfig config={config}>
         <ConnectKitProvider>
         <HashRouter>
+          <Navbar />
           <Routes>
             <Route
               path="/test"
