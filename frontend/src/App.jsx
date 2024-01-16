@@ -1,4 +1,5 @@
-import { ChakraProvider, Text } from '@chakra-ui/react';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 import { WagmiConfig, createConfig } from "wagmi";
 import { ConnectKitProvider, ConnectKitButton, getDefaultConfig } from "connectkit";
 import { sepolia } from "wagmi/chains";
@@ -32,8 +33,23 @@ function App() {
     <ChakraProvider>
       <WagmiConfig config={config}>
         <ConnectKitProvider>
-          <h1>Loan NFT</h1>
-          <ConnectKitButton />
+        <HashRouter>
+          <Routes>
+            <Route
+              path="/test"
+              element={
+                <>
+                  <h1>Test</h1>
+                </>} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <h1>Loan NFT</h1>
+                  <ConnectKitButton />
+                </>} />
+          </Routes>
+        </HashRouter>
         </ConnectKitProvider>
       </WagmiConfig>
     </ChakraProvider>
