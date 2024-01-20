@@ -5,6 +5,7 @@ import { ConnectKitProvider, ConnectKitButton } from "connectkit";
 
 import { connectkitconfig } from './connectkit.config';
 import Navbar from './components/layout/Navbar';
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -22,11 +23,7 @@ function App() {
                 </>} />
             <Route
               path="/"
-              element={
-                <>
-                  <h1>Loan NFT</h1>
-                  <ConnectKitButton />
-                </>} />
+              element={<Home />} />
           </Routes>
         </HashRouter>
         </ConnectKitProvider>
