@@ -1,19 +1,18 @@
-import { useContractWrite, usePrepareContractWrite } from 'wagmi';
+import { useContractWrite } from 'wagmi';
 
 import VaultABI from "../artifacts/contracts/Vault.sol/Vault.json";
 
 function Home() {
-  const { config } = usePrepareContractWrite({
-    addressOrName: "0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383",
-    contractInterface: VaultABI,
+  const { write } = useContractWrite({
+    address: "0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383",
+    abi: VaultABI.abi,
     functionName: 'deposit',
-    args: [BigInt("10000000000")],
+    args: ["0"],
+    onError(error) {
+      console.log(error);
+    },
   });
-
-  const { data, isLoading, isSuccess, write } = useContractWrite(config);
-  console.log(data, isSuccess)
  
-
   return (
     <>
       <h1>Test</h1>
