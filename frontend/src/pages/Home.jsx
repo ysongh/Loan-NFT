@@ -36,6 +36,16 @@ function Home() {
       console.log(error);
     },
   });
+
+  const { write: withdraw } = useContractWrite({
+    address: "0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383",
+    abi: VaultABI.abi,
+    functionName: 'withdraw',
+    args: ["1000000000000000000"],
+    onError(error) {
+      console.log(error);
+    },
+  });
  
   return (
     <Container>
@@ -47,6 +57,10 @@ function Home() {
       <br />
       <Button disabled={!deposit} onClick={() => deposit?.()}>
         Deposit
+      </Button>
+      <br />
+      <Button disabled={!withdraw} onClick={() => withdraw?.()}>
+        Withdraw
       </Button>
     </Container>
   );
