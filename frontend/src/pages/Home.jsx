@@ -60,7 +60,7 @@ function Home() {
   });
  
   return (
-    <Container>
+    <Container maxW='1100px'>
       <h1>Test</h1>
       <p>{formatEther(GHOBalance)} GHO</p>
       <p>{formatEther(balance)} Deposit</p>
