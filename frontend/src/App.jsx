@@ -6,6 +6,7 @@ import { ConnectKitProvider, ConnectKitButton } from "connectkit";
 import { connectkitconfig } from './connectkit.config';
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
+import MintNFT from './pages/MintNFT';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
                 <>
                   <h1>Test</h1>
                 </>} />
+            <Route
+              path="/mintnft"
+              element={<MintNFT />} />
             <Route
               path="/"
               element={<Home />} />

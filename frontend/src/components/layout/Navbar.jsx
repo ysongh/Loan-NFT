@@ -13,7 +13,7 @@ function Navbar() {
             </Link>
           </Box>
           <Link as={ReactLink} to="/">Home</Link>
-          <Link as={ReactLink} to="/test">Test</Link>
+          <Link as={ReactLink} to="/mintnft">Mint NFT</Link>
           <Spacer />
           <ConnectKitButton />
         </Flex>
