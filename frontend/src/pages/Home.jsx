@@ -77,7 +77,7 @@ function Home() {
 
           <TabPanels>
             <TabPanel>
-              <Heading>{formatEther(GHOBalance)} GHO</Heading>
+              <Heading>{formatEther(GHOBalance || 0)} GHO</Heading>
               <FormControl id="amount" isRequired>
                 <FormLabel>Amount</FormLabel>
                 <Input type="number" placeholder="Enter amount" />
@@ -92,7 +92,7 @@ function Home() {
             </TabPanel>
 
             <TabPanel>
-              <Heading>{formatEther(balance)} Deposit</Heading>
+              <Heading>{formatEther(balance || 0)} Deposit</Heading>
               <FormControl id="amount" isRequired>
                 <FormLabel>Amount</FormLabel>
                 <Input type="number" placeholder="Enter amount" />

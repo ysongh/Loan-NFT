@@ -9,7 +9,7 @@ function Navbar() {
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box mr="4">
             <Link as={ReactLink} to="/">
-              <Heading color="green" mt="3" mb="5">Loan NFT</Heading>
+              <Heading color="green" mt="3" mb="5">Community Vault</Heading>
             </Link>
           </Box>
           <Link as={ReactLink} to="/">Home</Link>
