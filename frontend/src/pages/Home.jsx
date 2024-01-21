@@ -1,12 +1,19 @@
+import { useState } from 'react';
 import { useContractRead, useContractWrite, useAccount } from 'wagmi';
 import { formatEther } from 'viem'
-import { Container, Button } from '@chakra-ui/react';
+import { Container, Box, FormControl, FormLabel, Input, Tab, TabList, TabPanel, TabPanels, Tabs, Button, Heading } from '@chakra-ui/react';
 
 import VaultABI from "../artifacts/contracts/Vault.sol/Vault.json";
 import GHOABI from "../GHO.json";
 
 function Home() {
   const { address } = useAccount();
+
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleTabChange = (index) => {
+    setSelectedTab(index);
+  };
 
   const { data: balance } = useContractRead({
     address: "0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383",
@@ -61,20 +68,42 @@ function Home() {
  
   return (
     <Container maxW='1100px'>
-      <h1>Test</h1>
-      <p>{formatEther(GHOBalance)} GHO</p>
-      <p>{formatEther(balance)} Deposit</p>
-      <Button disabled={!approve} onClick={() => approve?.()} mb="2">
-        Approve
-      </Button>
-      <br />
-      <Button disabled={!deposit} onClick={() => deposit?.()}>
-        Deposit
-      </Button>
-      <br />
-      <Button disabled={!withdraw} onClick={() => withdraw?.()}>
-        Withdraw
-      </Button>
+      <Box p={6} boxShadow="md" borderRadius="md" w={500}>
+        <Tabs onChange={handleTabChange} defaultIndex={selectedTab}>
+          <TabList>
+            <Tab>Deposit</Tab>
+            <Tab>Withdraw</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <Heading>{formatEther(GHOBalance)} GHO</Heading>
+              <FormControl id="amount" isRequired>
+                <FormLabel>Amount</FormLabel>
+                <Input type="number" placeholder="Enter amount" />
+              </FormControl>
+              <Button disabled={!approve} onClick={() => approve?.()} mt="2" mb="2">
+                Approve
+              </Button>
+              <br />
+              <Button disabled={!deposit} onClick={() => deposit?.()}>
+                Deposit
+              </Button>
+            </TabPanel>
+
+            <TabPanel>
+              <Heading>{formatEther(balance)} Deposit</Heading>
+              <FormControl id="amount" isRequired>
+                <FormLabel>Amount</FormLabel>
+                <Input type="number" placeholder="Enter amount" />
+              </FormControl>
+              <Button disabled={!withdraw} onClick={() => withdraw?.()} mt="2">
+                Withdraw
+              </Button>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
     </Container>
   );
 };
