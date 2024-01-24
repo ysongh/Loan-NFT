@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useContractRead, useContractWrite, useAccount } from 'wagmi';
 import { formatEther } from 'viem'
-import { Container, Box, FormControl, FormLabel, Input, Tab, TabList, TabPanel, TabPanels, Tabs, Button, Heading } from '@chakra-ui/react';
+import { Center, Box, FormControl, FormLabel, Input, Tab, TabList, TabPanel, TabPanels, Tabs, Button, Heading } from '@chakra-ui/react';
 
 import VaultABI from "../artifacts/contracts/Vault.sol/Vault.json";
 import GHOABI from "../GHO.json";
@@ -67,7 +67,7 @@ function Home() {
   });
  
   return (
-    <Container maxW='1100px'>
+    <Center>
       <Box p={6} boxShadow="md" borderRadius="md" w={500}>
         <Tabs onChange={handleTabChange} defaultIndex={selectedTab}>
           <TabList>
@@ -104,7 +104,7 @@ function Home() {
           </TabPanels>
         </Tabs>
       </Box>
-    </Container>
+    </Center>
   );
 };
 
