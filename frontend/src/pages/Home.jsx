@@ -36,6 +36,16 @@ function Home() {
     },
   });
 
+  const { data: GHOAllowance } = useContractRead({
+    address: "0xc4bF5CbDaBE595361438F8c6a187bDc330539c60",
+    abi: GHOABI.abi,
+    functionName: 'allowance',
+    args: [address, "0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383"],
+    onError(error) {
+      console.log(error);
+    },
+  });
+
   const { write: approve } = useContractWrite({
     address: "0xc4bF5CbDaBE595361438F8c6a187bDc330539c60",
     abi: GHOABI.abi,
@@ -50,7 +60,7 @@ function Home() {
     address: "0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383",
     abi: VaultABI.abi,
     functionName: 'deposit',
-    args: ["1000000000000000000"],
+    args: [GHOAllowance],
     onError(error) {
       console.log(error);
     },
@@ -78,17 +88,18 @@ function Home() {
           <TabPanels>
             <TabPanel>
               <Heading>{formatEther(GHOBalance || 0)} GHO</Heading>
-              <FormControl id="amount" isRequired>
+              <FormControl id="amount" isRequired mb="3">
                 <FormLabel>Amount</FormLabel>
                 <Input type="number" placeholder="Enter amount" />
               </FormControl>
-              <Button disabled={!approve} onClick={() => approve?.()} mt="2" mb="2">
-                Approve
-              </Button>
-              <br />
-              <Button disabled={!deposit} onClick={() => deposit?.()}>
-                Deposit
-              </Button>
+              {GHOAllowance <= 0
+                ? <Button disabled={!approve} onClick={() => approve?.()} mt="2" mb="2">
+                    Approve
+                  </Button>
+                : <Button disabled={!deposit} onClick={() => deposit?.()}>
+                    Deposit
+                  </Button>
+              }
             </TabPanel>
 
             <TabPanel>
