@@ -1,8 +1,24 @@
 import { Link as ReactLink } from 'react-router-dom';
-import { Container, Box, Flex, Heading, Spacer, Link, Button } from '@chakra-ui/react';
+import { Container, Box, Flex, Heading, Text, Spacer, Link } from '@chakra-ui/react';
 import { ConnectKitButton } from "connectkit";
+import { useContractRead, useAccount } from 'wagmi';
+import { formatEther } from 'viem';
+
+import GHOABI from "../../GHO.json";
 
 function Navbar() {
+  const { address } = useAccount();
+
+  const { data: GHOBalance } = useContractRead({
+    address: "0xc4bF5CbDaBE595361438F8c6a187bDc330539c60",
+    abi: GHOABI.abi,
+    functionName: 'balanceOf',
+    args: [address],
+    onError(error) {
+      console.log(error);
+    },
+  });
+
   return (
     <Box p={2}>
       <Container maxW='1100px'>
@@ -15,6 +31,7 @@ function Navbar() {
           <Link as={ReactLink} to="/">Home</Link>
           <Link as={ReactLink} to="/mintnft">Mint NFT</Link>
           <Spacer />
+          <Text>{formatEther(GHOBalance || 0)} GHO</Text>
           <ConnectKitButton />
         </Flex>
       </Container>
