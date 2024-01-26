@@ -5,12 +5,13 @@ import { useContractRead, useAccount } from 'wagmi';
 import { formatEther } from 'viem';
 
 import GHOABI from "../../GHO.json";
+import { GHO_ADDRESS } from '../../keys';
 
 function Navbar() {
   const { address } = useAccount();
 
   const { data: GHOBalance } = useContractRead({
-    address: "0xc4bF5CbDaBE595361438F8c6a187bDc330539c60",
+    address: GHO_ADDRESS,
     abi: GHOABI.abi,
     functionName: 'balanceOf',
     args: [address],

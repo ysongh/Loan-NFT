@@ -5,6 +5,7 @@ import { Center, Box, FormControl, FormLabel, Input, Tab, TabList, TabPanel, Tab
 
 import VaultABI from "../artifacts/contracts/Vault.sol/Vault.json";
 import GHOABI from "../GHO.json";
+import { VAULT_ADDRESS, GHO_ADDRESS } from '../keys';
 
 function Home() {
   const { address } = useAccount();
@@ -16,7 +17,7 @@ function Home() {
   };
 
   const { data: balance } = useContractRead({
-    address: "0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383",
+    address: VAULT_ADDRESS,
     abi: VaultABI.abi,
     functionName: 'balanceOf',
     args: [address],
@@ -27,7 +28,7 @@ function Home() {
 
 
   const { data: GHOBalance } = useContractRead({
-    address: "0xc4bF5CbDaBE595361438F8c6a187bDc330539c60",
+    address: GHO_ADDRESS,
     abi: GHOABI.abi,
     functionName: 'balanceOf',
     args: [address],
@@ -37,27 +38,27 @@ function Home() {
   });
 
   const { data: GHOAllowance } = useContractRead({
-    address: "0xc4bF5CbDaBE595361438F8c6a187bDc330539c60",
+    address: GHO_ADDRESS,
     abi: GHOABI.abi,
     functionName: 'allowance',
-    args: [address, "0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383"],
+    args: [address, VAULT_ADDRESS],
     onError(error) {
       console.log(error);
     },
   });
 
   const { write: approve } = useContractWrite({
-    address: "0xc4bF5CbDaBE595361438F8c6a187bDc330539c60",
+    address: GHO_ADDRESS,
     abi: GHOABI.abi,
     functionName: 'approve',
-    args: ["0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383", "1000000000000000000"],
+    args: [VAULT_ADDRESS, "1000000000000000000"],
     onError(error) {
       console.log(error);
     },
   });
 
   const { write: deposit } = useContractWrite({
-    address: "0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383",
+    address: VAULT_ADDRESS,
     abi: VaultABI.abi,
     functionName: 'deposit',
     args: [GHOAllowance],
@@ -67,7 +68,7 @@ function Home() {
   });
 
   const { write: withdraw } = useContractWrite({
-    address: "0xc0B022D8c28fDE375Bf4D032cdD1b94ae507D383",
+    address: VAULT_ADDRESS,
     abi: VaultABI.abi,
     functionName: 'withdraw',
     args: ["1000000000000000000"],
