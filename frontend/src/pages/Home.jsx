@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useContractRead, useContractWrite, useAccount } from 'wagmi';
 import { formatEther } from 'viem'
-import { Center, Box, FormControl, FormLabel, Input, Tab, TabList, TabPanel, TabPanels, Tabs, Button, Heading } from '@chakra-ui/react';
+import { Center, Box, FormControl, FormLabel, Input, Tab, TabList, TabPanel, TabPanels, Tabs, Button, Text, Heading } from '@chakra-ui/react';
 
 import VaultABI from "../artifacts/contracts/Vault.sol/Vault.json";
 import GHOABI from "../GHO.json";
@@ -93,6 +93,9 @@ function Home() {
                 <FormLabel>Amount</FormLabel>
                 <Input type="number" placeholder="Enter amount" />
               </FormControl>
+              <Text my="2">
+                Allowance: {formatEther(GHOAllowance || 0)} GHO
+              </Text>
               {GHOAllowance <= 0
                 ? <Button disabled={!approve} onClick={() => approve?.()} mt="2" mb="2">
                     Approve
