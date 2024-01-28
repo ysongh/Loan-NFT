@@ -11,6 +11,7 @@ function Home() {
   const { address } = useAccount();
 
   const [selectedTab, setSelectedTab] = useState(0);
+  const [amount, setAmount] = useState(0);
 
   const handleTabChange = (index) => {
     setSelectedTab(index);
@@ -51,7 +52,7 @@ function Home() {
     address: GHO_ADDRESS,
     abi: GHOABI.abi,
     functionName: 'approve',
-    args: [VAULT_ADDRESS, "1000000000000000000"],
+    args: [VAULT_ADDRESS, amount],
     onError(error) {
       console.log(error);
     },
@@ -71,7 +72,7 @@ function Home() {
     address: VAULT_ADDRESS,
     abi: VaultABI.abi,
     functionName: 'withdraw',
-    args: ["1000000000000000000"],
+    args: [amount],
     onError(error) {
       console.log(error);
     },
@@ -91,7 +92,7 @@ function Home() {
               <Heading>{formatEther(GHOBalance || 0)} GHO</Heading>
               <FormControl id="amount" isRequired mb="3">
                 <FormLabel>Amount</FormLabel>
-                <Input type="number" placeholder="Enter amount" />
+                <Input type="number" placeholder="Enter amount" value={amount} onChange={e => setAmount(e.target.value)}/>
               </FormControl>
               <Text my="2">
                 Allowance: {formatEther(GHOAllowance || 0)} GHO
