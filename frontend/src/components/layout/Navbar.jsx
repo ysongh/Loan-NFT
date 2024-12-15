@@ -21,7 +21,7 @@ function Navbar() {
   });
 
   return (
-    <Box p={2}>
+    <Box p={2} bg="greenyellow">
       <Container maxW='1100px'>
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box mr="4">
