@@ -79,7 +79,7 @@ function Home() {
   });
  
   return (
-    <Center>
+    <Center mt="10">
       <Box p={6} boxShadow="md" borderRadius="md" w={500}>
         <Tabs onChange={handleTabChange} defaultIndex={selectedTab}>
           <TabList>
